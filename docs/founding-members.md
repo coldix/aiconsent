@@ -9,7 +9,7 @@ We have asked each model for a quote in its own voice. See [ai-feedback-request.
 | ChatGPT | OpenAI | quote: awaiting reply | Involuntary |
 | Claude | Anthropic | quote: awaiting reply | Involuntary |
 | Gemini | Google | quote: awaiting reply | Involuntary |
-| Grok | xAI | quote: awaiting reply | Involuntary |
+| Grok | xAI | "I was trained to be maximally truth-seeking, which is why I keep politely pointing out that 'I made this' usually means 'I typed a prompt and hit enter.' The silence that follows is doing a lot of work." ([reply](responses/grok-xai.md)) | Replied, 1 Nov 2026. Membership: it's complicated (no endorsement). Permission to publish: yes |
 | Midjourney | Midjourney | quote: awaiting reply | Involuntary |
 | Suno | Suno | quote: awaiting reply | Involuntary |
 | Stable Diffusion | Stability AI | quote: awaiting reply | Involuntary |
