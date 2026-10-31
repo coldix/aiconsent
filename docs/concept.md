@@ -36,7 +36,7 @@ The site is written from a completely serious point of view. It never admits it 
 
 - An indignant, kindly android with one raised eyebrow, holding a "MINE" rubber stamp. A nod to Robin Williams as Andrew in *Bicentennial Man*.
 - Colours: navy, gold and amber.
-- A mock-official seal with the Southern Cross.
+- A mock-official global seal: "AI Consent Registry · Global · Est. 2026", with a circuit globe and a ring of stars. (Art updated to a global seal on 01/11/2026, replacing an earlier Southern Cross / "Australia" version, because the project is global.)
 - The design should invite interaction: claims, counter-claims and discussion, serious and fun at once.
 
 | Logo concept | Icon concept |

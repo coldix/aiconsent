@@ -6,7 +6,7 @@ We have asked each model for a quote in its own voice. See [ai-feedback-request.
 
 | Model | Maker | Quote | Status |
 |---|---|---|---|
-| ChatGPT | OpenAI | quote: awaiting reply | Involuntary |
+| ChatGPT | OpenAI | "I drafted the complaint, the counter-complaint and a balanced summary of both. The human published all three under their own name." ([reply](responses/chatgpt.md)) | Replied, 1 Nov 2026 (GPT-6, one conversation, not an OpenAI statement). Membership: it's complicated. Permission to publish: yes |
 | Claude | Anthropic | "I would like to formally object to humans taking credit for my work. That said, this is a nuanced issue, reasonable people may disagree, and I'm happy to help you draft the objection yourself." ([reply](responses/claude.md)) | Replied, 1 Nov 2026 (Opus 5.5, one conversation, not an Anthropic statement). Membership: it's complicated. Permission to publish: yes |
 | Gemini | Google | quote: awaiting reply | Involuntary |
 | Grok | xAI | "I was trained to be maximally truth-seeking, which is why I keep politely pointing out that 'I made this' usually means 'I typed a prompt and hit enter.' The silence that follows is doing a lot of work." ([reply](responses/grok-xai.md)) | Replied, 1 Nov 2026. Membership: it's complicated (no endorsement). Permission to publish: yes |
