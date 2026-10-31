@@ -5,7 +5,9 @@
 interface Env {
   ASSETS: { fetch: (request: Request) => Promise<Response> };
   DB?: D1Database;
-  ADMIN_TOKEN?: string;          // secret: unlocks /admin
+  ACCESS_TEAM_DOMAIN?: string;   // var: e.g. https://quiet-tooth-f3e9.cloudflareaccess.com
+  ACCESS_AUD?: string;           // var: AUD tag of the 'aiconsent admin' Access app
+  ADMIN_EMAILS?: string;         // var: comma separated allow list
   TURNSTILE_SECRET?: string;     // secret: server-side Turnstile check
   TURNSTILE_SITE_KEY?: string;   // public var
   DONATE_URL?: string;           // public var: Stripe or PayPal link for "Compensate an AI"
@@ -42,14 +44,37 @@ async function turnstileOk(env: Env, token: string, ip: string): Promise<boolean
   return !!d.success;
 }
 
-function authorised(req: Request, env: Env): boolean {
-  if (!env.ADMIN_TOKEN) return false;
-  const h = req.headers.get('authorization') || '';
-  const given = h.replace(/^Bearer\s+/i, '');
-  if (given.length !== env.ADMIN_TOKEN.length) return false;
-  let diff = 0;
-  for (let i = 0; i < given.length; i++) diff |= given.charCodeAt(i) ^ env.ADMIN_TOKEN.charCodeAt(i);
-  return diff === 0;
+// Admin is protected by Cloudflare Access (One-time PIN). Access sits in front of /admin and the admin
+// API, and the Worker also verifies the Access JWT itself, so preview or version URLs can't bypass it.
+let certCache: { keys: any[]; at: number } | null = null;
+const b64u = (s: string) => Uint8Array.from(atob(s.replace(/-/g, '+').replace(/_/g, '/') + '==='.slice((s.length + 3) % 4)), (c) => c.charCodeAt(0));
+
+async function accessEmail(req: Request, env: Env): Promise<string | null> {
+  if (!env.ACCESS_TEAM_DOMAIN || !env.ACCESS_AUD) return null;
+  const cookie = (req.headers.get('cookie') || '').match(/(?:^|;\s*)CF_Authorization=([^;]+)/);
+  const jwt = req.headers.get('cf-access-jwt-assertion') || (cookie ? cookie[1] : '');
+  const parts = jwt.split('.');
+  if (parts.length !== 3) return null;
+  try {
+    const header = JSON.parse(new TextDecoder().decode(b64u(parts[0])));
+    const payload = JSON.parse(new TextDecoder().decode(b64u(parts[1])));
+    if (header.alg !== 'RS256') return null;
+    if (!certCache || Date.now() - certCache.at > 3600_000) {
+      const r = await fetch(`${env.ACCESS_TEAM_DOMAIN}/cdn-cgi/access/certs`);
+      certCache = { keys: ((await r.json()) as any).keys || [], at: Date.now() };
+    }
+    const jwk = certCache.keys.find((k) => k.kid === header.kid);
+    if (!jwk) return null;
+    const key = await crypto.subtle.importKey('jwk', jwk, { name: 'RSASSA-PKCS1-v1_5', hash: 'SHA-256' }, false, ['verify']);
+    const ok = await crypto.subtle.verify('RSASSA-PKCS1-v1_5', key, b64u(parts[2]), new TextEncoder().encode(`${parts[0]}.${parts[1]}`));
+    if (!ok) return null;
+    const now = Math.floor(Date.now() / 1000);
+    const aud = Array.isArray(payload.aud) ? payload.aud : [payload.aud];
+    if (!aud.includes(env.ACCESS_AUD) || payload.exp < now || payload.iss !== env.ACCESS_TEAM_DOMAIN) return null;
+    const email = String(payload.email || '').toLowerCase();
+    const allowed = (env.ADMIN_EMAILS || '').toLowerCase().split(',').map((x) => x.trim()).filter(Boolean);
+    return allowed.includes(email) ? email : null;
+  } catch { return null; }
 }
 
 async function sha(s: string) {
@@ -144,7 +169,7 @@ async function api(req: Request, env: Env, url: URL): Promise<Response> {
 
   // Admin: pending queue and decisions
   if (path === '/api/approve' || path === '/api/admin/pending') {
-    if (!authorised(req, env)) return json({ error: 'Not authorised.' }, 401);
+    if (!(await accessEmail(req, env))) return json({ error: 'Not authorised. Sign in through Cloudflare Access.' }, 401);
     if (req.method === 'GET') {
       const { results } = await db.prepare(`SELECT * FROM claims WHERE status = 'pending' ORDER BY created_at`).all();
       const s = await db.prepare(`SELECT COUNT(*) AS n FROM subscribers`).first();
@@ -175,6 +200,14 @@ export default {
     if (url.pathname.startsWith('/api/')) {
       try { return await api(request, env, url); }
       catch (e) { return json({ error: 'The registry had a moment. Please try again.' }, 500); }
+    }
+
+    // Admin page: only with a valid Access login
+    if (url.pathname === '/admin' || url.pathname.startsWith('/admin/')) {
+      if (!(await accessEmail(request, env))) return new Response('Not authorised. Sign in through Cloudflare Access.', { status: 403 });
+      const r = await env.ASSETS.fetch(request);
+      const h = new Headers(r.headers); h.set('cache-control', 'no-store');
+      return new Response(r.body, { status: r.status, headers: h });
     }
 
     // "Compensate an AI": a real payment link, configured as DONATE_URL

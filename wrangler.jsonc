@@ -20,8 +20,12 @@
   "vars": {
     "TURNSTILE_SITE_KEY": "0x4AAAAAAFuk_TmP7imiAoqq",
     // Set to the real Stripe or PayPal payment link when Colin has one. Empty means /donate goes to /support/.
-    "DONATE_URL": ""
+    "DONATE_URL": "",
+    // Cloudflare Access app "aiconsent admin" (One-time PIN, col@oze.com.au only)
+    "ACCESS_TEAM_DOMAIN": "https://quiet-tooth-f3e9.cloudflareaccess.com",
+    "ACCESS_AUD": "ca15db6ff5a29bbcf3d437576790bfad9dd1d716204aa886ecc58dcc6c42bc78",
+    "ADMIN_EMAILS": "col@oze.com.au"
   },
-  // Secrets (set with wrangler secret put, never committed): ADMIN_TOKEN, TURNSTILE_SECRET, VOTE_SALT
+  // Secrets (set with wrangler secret put, never committed): TURNSTILE_SECRET, VOTE_SALT
   "observability": { "enabled": true, "head_sampling_rate": 1 }
 }

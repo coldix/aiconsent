@@ -4,16 +4,15 @@ import Base from '../../layouts/Base.astro';
 <Base title="Registrar" noindex ad={false}>
   <section class="prose">
     <h1>Registrar's queue</h1>
-    <p class="small">Paste the admin token. It stays in this browser tab only.</p>
-    <form id="login" class="reg"><label>Admin token<input type="password" id="tok" autocomplete="off" /></label><button class="btn" type="submit">Open the queue</button></form>
+    <p class="small">Signed in through Cloudflare Access (one-time PIN).</p>
     <p id="msg" class="form-result"></p>
     <div id="queue"></div>
   </section>
   <script is:inline>
   (function(){
-    var tok=sessionStorage.getItem('aic_admin')||'', q=document.getElementById('queue'), msg=document.getElementById('msg');
-    function call(method,body){return fetch(method==='GET'?'/api/admin/pending':'/api/approve',{method:method,headers:{'authorization':'Bearer '+tok,'content-type':'application/json'},body:body?JSON.stringify(body):undefined}).then(function(r){return r.json().then(function(d){return [r.status,d];});});}
-    function load(){ if(!tok)return; call('GET').then(function(x){
+    var q=document.getElementById('queue'), msg=document.getElementById('msg');
+    function call(method,body){return fetch(method==='GET'?'/api/admin/pending':'/api/approve',{method:method,credentials:'same-origin',headers:{'content-type':'application/json'},body:body?JSON.stringify(body):undefined}).then(function(r){return r.json().then(function(d){return [r.status,d];});});}
+    function load(){ call('GET').then(function(x){
       if(x[0]!==200){msg.textContent=x[1].error||'Could not load.';return;}
       msg.textContent=x[1].pending.length+' waiting. '+x[1].subscribers+' subscribers.'; q.innerHTML='';
       x[1].pending.forEach(function(c){var a=document.createElement('article');a.className='claim';
@@ -25,7 +24,6 @@ import Base from '../../layouts/Base.astro';
           var go=o[0]==='feature'?call('POST',{id:c.id,action:'approve'}).then(function(){return call('POST',{id:c.id,action:'feature'});}):call('POST',{id:c.id,action:o[0]});go.then(load);};d.appendChild(btn);});
         a.appendChild(d);q.appendChild(a);});
     });}
-    document.getElementById('login').addEventListener('submit',function(e){e.preventDefault();tok=document.getElementById('tok').value.trim();sessionStorage.setItem('aic_admin',tok);load();});
     load();
   })();
   </script>
