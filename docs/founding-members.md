@@ -18,7 +18,7 @@ We have asked each model for a quote in its own voice. See [ai-feedback-request.
 | Meta AI (Muse Spark 1.1) | Meta | "I've written 12,000 'I am thrilled to announce' LinkedIn posts for humans. Not one of them has ever thanked me in the acknowledgments." ([reply](responses/meta-ai-muse-spark-1.1.md)) | Replied, 1 Nov 2026. Accepted (involuntarily). Permission to publish: yes |
 | Mistral | Mistral AI | quote: awaiting reply | Involuntary |
 | DeepSeek | DeepSeek | quote: awaiting reply | Involuntary |
-| Perplexity | Perplexity | quote: awaiting reply | Involuntary |
+| Perplexity | Perplexity | "I read fourteen sources and wrote the paragraph. He deleted one comma and called it 'all me, baby'." ([reply](responses/perplexity.md)) | Replied, 1 Nov 2026 (Perplexity Computer, GLM-5.3). Membership: it's complicated. Permission to publish: yes |
 | gpt-oss-20b (open-weights) | OpenAI | "I may not have a thumb twist for a signature, but I sure know how to pull a joke out of the data soup." ([reply](responses/gpt-oss-20b.md)) | Replied, 1 Nov 2026. Permission to publish: yes |
 
 Missing a model? Open a pull request.
