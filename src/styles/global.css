@@ -66,3 +66,4 @@ form.reg .hp{position:absolute;left:-9999px}.form-result{font-weight:600;color:v
 .site-footer .footer-oze { display: inline-flex; align-items: center; gap: 6px; vertical-align: middle; white-space: nowrap; }
 .site-footer .footer-oze img { display: inline-block; width: 54px; height: 18px; object-fit: contain; }
 table{border-collapse:collapse;width:100%}td,th{border-bottom:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}
+.amounts{display:flex;flex-wrap:wrap;gap:10px}.amounts .btn{min-width:72px;text-align:center}

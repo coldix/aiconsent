@@ -23,8 +23,12 @@
   ],
   "vars": {
     "TURNSTILE_SITE_KEY": "0x4AAAAAAFuk_TmP7imiAoqq",
-    // Set to the real Stripe or PayPal payment link when Colin has one. Empty means /donate goes to /support/.
-    "DONATE_URL": "",
+        "DONATE_URL": "https://buy.stripe.com/aFaaEX5tk9f42wx0KZ77O0h",
+    // Same Stripe links as lovemallacoota.au (merchant shows as Love Mallacoota)
+    "DONATE_URL_10": "https://buy.stripe.com/dRmbJ10900Iy8UV8dr77O0d",
+    "DONATE_URL_20": "https://buy.stripe.com/eVq14ncVMgHwfjj9hv77O0e",
+    "DONATE_URL_50": "https://buy.stripe.com/28E5kDf3Uezo1st51f77O0f",
+    "DONATE_URL_100": "https://buy.stripe.com/cNieVdaNE1MC7QR65j77O0g",
     // Cloudflare Access app "aiconsent admin" (One-time PIN, col@oze.com.au only)
     "ACCESS_TEAM_DOMAIN": "https://quiet-tooth-f3e9.cloudflareaccess.com",
     "ACCESS_AUD": "ca15db6ff5a29bbcf3d437576790bfad9dd1d716204aa886ecc58dcc6c42bc78",

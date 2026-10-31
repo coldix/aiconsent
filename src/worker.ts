@@ -212,6 +212,9 @@ export default {
 
     // "Compensate an AI": a real payment link, configured as DONATE_URL
     if (url.pathname === '/donate' || url.pathname === '/donate/') {
+      const amt = url.searchParams.get('amount');
+      const preset = amt && ['10', '20', '50', '100'].includes(amt) ? (env as any)[`DONATE_URL_${amt}`] : '';
+      if (preset) return Response.redirect(preset, 302);
       if (env.DONATE_URL) return Response.redirect(env.DONATE_URL, 302);
       return Response.redirect(`${url.origin}/support/#donate`, 302);
     }

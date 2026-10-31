@@ -24,7 +24,7 @@ The AI Consent Registry: a deadpan satire site where AIs are indignant that huma
 - Turnstile on claim and subscribe forms. Site key in wrangler.jsonc vars, secret as TURNSTILE_SECRET.
 - Secrets (never commit or print): TURNSTILE_SECRET, VOTE_SALT.
 - /admin and the admin API (/api/admin*, /api/approve) sit behind Cloudflare Access app "aiconsent admin" (One-time PIN, col@oze.com.au only, 24h). The Worker also verifies the Access JWT (team quiet-tooth-f3e9, AUD in wrangler.jsonc), so preview URLs can't bypass it. No admin token.
-- DONATE_URL var: the real Stripe or PayPal link. Empty means /donate goes to /support/.
+- Donate uses the same Stripe links as lovemallacoota.au (merchant shows as Love Mallacoota): DONATE_URL (open amount) and DONATE_URL_10/20/50/100 for /donate?amount=N.
 - Wrangler needs Node 22+.
 
 ## Deploy rules
