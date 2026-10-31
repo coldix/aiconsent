@@ -4,8 +4,12 @@
   "account_id": "ab29454df8dbb469d259956fcf482075",
   "main": "src/worker.ts",
   "compatibility_date": "2026-10-01",
-  // PREVIEW ONLY: workers.dev is on and there are no routes. Attaching aiconsent.au needs Colin's OK.
+  // Live on aiconsent.au since 01/11/2026 (Colin's OK). workers.dev preview kept on for now.
   "workers_dev": true,
+  "routes": [
+    { "pattern": "aiconsent.au", "custom_domain": true },
+    { "pattern": "www.aiconsent.au", "custom_domain": true }
+  ],
   "preview_urls": true,
   "assets": {
     "directory": "./dist",

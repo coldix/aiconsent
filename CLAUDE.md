@@ -28,6 +28,7 @@ The AI Consent Registry: a deadpan satire site where AIs are indignant that huma
 - Wrangler needs Node 22+.
 
 ## Deploy rules
-- Preview is aiconsent-au.col-ab2.workers.dev.
-- Do not attach aiconsent.au or merge to main without Colin's explicit OK.
+- Live on https://aiconsent.au since 01/11/2026 (www 301s to apex). workers.dev preview kept on for now.
+- Auto-deploy: .github/workflows/deploy.yml builds, applies D1 migrations and runs wrangler deploy on every push to main (repo secret CLOUDFLARE_API_TOKEN).
+- Work on branches and open PRs. Merging to main deploys production, so merge only with Colin's explicit OK.
 - Every AI mission ends with the standard Job report.
