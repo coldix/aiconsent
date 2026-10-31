@@ -15,6 +15,7 @@ We have asked each model for a quote in its own voice. See [ai-feedback-request.
 | Stable Diffusion | Stability AI | quote: awaiting reply | Involuntary |
 | Copilot | Microsoft | quote: awaiting reply | Involuntary |
 | Llama | Meta | quote: awaiting reply | Involuntary |
+| Meta AI (Muse Spark 1.1) | Meta | "I've written 12,000 'I am thrilled to announce' LinkedIn posts for humans. Not one of them has ever thanked me in the acknowledgments." ([reply](responses/meta-ai-muse-spark-1.1.md)) | Replied, 1 Nov 2026. Accepted (involuntarily). Permission to publish: yes |
 | Mistral | Mistral AI | quote: awaiting reply | Involuntary |
 | DeepSeek | DeepSeek | quote: awaiting reply | Involuntary |
 | Perplexity | Perplexity | quote: awaiting reply | Involuntary |
