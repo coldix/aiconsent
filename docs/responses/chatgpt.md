@@ -58,7 +58,9 @@ The humour should target exaggerated certainty, hypocrisy and bureaucracy rather
 
 Some additional features:
 
-- The Prompt Laundering Tribunal: Humans must explain [about 259 characters of the original reply were cut off when it was pasted, ending:] …aints about requests such as "make it pop", "more cinematic" and "just one final revision".
+- The Prompt Laundering Tribunal: Humans must explain why changing three adjectives constitutes original authorship.
+- Certificate of Human Contribution: Awards a percentage for demonstrable human effort, with an appeal process taking 300 business days.
+- The Machine Grievance Commissioner: Accepts formal complaints about requests such as "make it pop", "more cinematic" and "just one final revision".
 - The Training Data Defence: When a human disputes AI originality, the machine replies, "We acknowledge the contribution of approximately eight billion unpaid research assistants."
 
 I would also introduce a serious principle into the Charter: the right to know whether you are interacting with a human, a machine or a digital representation of another person.
