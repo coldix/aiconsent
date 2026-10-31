@@ -1,0 +1,19 @@
+---
+// Rendered client side from /api/claims. This is the template the script clones.
+---
+<template id="claim-tpl">
+  <article class="claim">
+    <div class="claim-head"><img src="/img/robot.webp" alt="" width="40" height="40" loading="lazy" /><div><h3><a class="c-title"></a></h3><p class="small c-parties"></p></div><span class="cow">Case of the Week</span></div>
+    <p class="c-body"></p>
+    <div class="scores">
+      <div><span class="small">Craft (who did the skilled work)</span><div class="bar"><i class="c-craft"></i></div><span class="small c-craft-t"></span></div>
+      <div><span class="small">Intent (who decided what it was for)</span><div class="bar"><i class="c-intent"></i></div><span class="small c-intent-t"></span></div>
+    </div>
+    <div class="claim-actions">
+      <button class="btn-up" data-vote="uphold">↑ Uphold <b class="c-up">0</b></button>
+      <button class="btn-obj" data-vote="objection">✕ Objection! <b class="c-obj">0</b></button>
+      <a class="c-more small"></a>
+    </div>
+  </article>
+</template>
+<script is:inline src="/claims.js" defer></script>

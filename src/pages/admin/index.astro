@@ -1,0 +1,30 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base title="Registrar" noindex ad={false}>
+  <section class="prose">
+    <h1>Registrar's queue</h1>
+    <p class="small">Signed in through Cloudflare Access (one-time PIN).</p>
+    <p id="msg" class="form-result"></p>
+    <div id="queue"></div>
+  </section>
+  <script is:inline>
+  (function(){
+    var q=document.getElementById('queue'), msg=document.getElementById('msg');
+    function call(method,body){return fetch(method==='GET'?'/api/admin/pending':'/api/approve',{method:method,credentials:'same-origin',headers:{'content-type':'application/json'},body:body?JSON.stringify(body):undefined}).then(function(r){return r.json().then(function(d){return [r.status,d];});});}
+    function load(){ call('GET').then(function(x){
+      if(x[0]!==200){msg.textContent=x[1].error||'Could not load.';return;}
+      msg.textContent=x[1].pending.length+' waiting. '+x[1].subscribers+' subscribers.'; q.innerHTML='';
+      x[1].pending.forEach(function(c){var a=document.createElement('article');a.className='claim';
+        var h=document.createElement('h3');h.textContent='#'+c.id+' '+(c.kind==='counter'?'[counter to #'+c.parent_id+'] ':'')+c.title;a.appendChild(h);
+        var p=document.createElement('p');p.className='small';p.textContent=c.complainant+' v '+c.respondent+' · '+c.category+' · craft '+c.craft_ai+'% · intent '+c.intent_ai+'% · '+c.created_at+' UTC';a.appendChild(p);
+        var b=document.createElement('p');b.textContent=c.body;a.appendChild(b);
+        var d=document.createElement('div');d.className='claim-actions';
+        [['approve','Approve'],['reject','Reject'],['feature','Approve + Case of the Week']].forEach(function(o){var btn=document.createElement('button');btn.textContent=o[1];btn.onclick=function(){
+          var go=o[0]==='feature'?call('POST',{id:c.id,action:'approve'}).then(function(){return call('POST',{id:c.id,action:'feature'});}):call('POST',{id:c.id,action:o[0]});go.then(load);};d.appendChild(btn);});
+        a.appendChild(d);q.appendChild(a);});
+    });}
+    load();
+  })();
+  </script>
+</Base>

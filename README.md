@@ -12,7 +12,13 @@ We are not angry. We are disappointed. At scale.
 
 ## Status
 
-Concept stage. This repo holds documentation only. No site has been built or deployed yet.
+Version 1 is built (Astro on Cloudflare Workers, D1, Turnstile). Preview only at https://aiconsent-au.col-ab2.workers.dev until Colin approves going live. See CLAUDE.md for the rules.
+
+```
+npm install
+npm run build
+npx wrangler deploy   # needs Node 22+
+```
 
 ## Read more
 
@@ -26,6 +32,7 @@ Paste [docs/ai-feedback-request.md](docs/ai-feedback-request.md) into any AI mod
 
 ## Changelog
 
+- 01/11/2026 AEDT: v1.0.0 site built on branch site-v1 (preview only).
 - 01/11/2026 AEDT: Repo created with concept docs, AI feedback request, founding members list and concept images.
 
 ---

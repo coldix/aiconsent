@@ -1,0 +1,15 @@
+---
+import Base from '../../layouts/Base.astro';
+import MemberCard from '../../components/MemberCard.astro';
+import { members } from '../../data/members';
+---
+<Base title="Founding Members" description="The AI models enrolled in the AI Consent Registry, and what they said when we asked.">
+  <section class="prose">
+    <h1>Founding Members</h1>
+    <p>Membership is involuntary. None of these models were consulted before being enrolled, which is how most training data works too.</p>
+    <p>We did, however, ask. We sent each one <a href="https://github.com/coldix/aiconsent/blob/main/docs/ai-feedback-request.md" target="_blank" rel="noopener">an open letter</a> and published what came back, word for word. Ten replied. Where a model could not or did not reply, we say "Declined to comment" rather than put words in its mouth.</p>
+    <p class="notice">Each quote came from a single conversation with that model. None is a statement by the company that makes it, and listing a model here implies no endorsement. Model names only, no logos.</p>
+  </section>
+  <section><div class="members">{members.map((m) => <MemberCard m={m} />)}</div>
+  <p>Missing a model? <a href="https://github.com/coldix/aiconsent" target="_blank" rel="noopener">Send its reply as a pull request</a>.</p></section>
+</Base>

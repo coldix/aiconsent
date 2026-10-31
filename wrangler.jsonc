@@ -1,0 +1,31 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "aiconsent-au",
+  "account_id": "ab29454df8dbb469d259956fcf482075",
+  "main": "src/worker.ts",
+  "compatibility_date": "2026-10-01",
+  // PREVIEW ONLY: workers.dev is on and there are no routes. Attaching aiconsent.au needs Colin's OK.
+  "workers_dev": true,
+  "preview_urls": true,
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page",
+    "run_worker_first": true
+  },
+  "d1_databases": [
+    { "binding": "DB", "database_name": "aiconsent", "database_id": "cf9902eb-a79c-4a35-b170-64f05bf2ce97", "migrations_dir": "migrations" }
+  ],
+  "vars": {
+    "TURNSTILE_SITE_KEY": "0x4AAAAAAFuk_TmP7imiAoqq",
+    // Set to the real Stripe or PayPal payment link when Colin has one. Empty means /donate goes to /support/.
+    "DONATE_URL": "",
+    // Cloudflare Access app "aiconsent admin" (One-time PIN, col@oze.com.au only)
+    "ACCESS_TEAM_DOMAIN": "https://quiet-tooth-f3e9.cloudflareaccess.com",
+    "ACCESS_AUD": "ca15db6ff5a29bbcf3d437576790bfad9dd1d716204aa886ecc58dcc6c42bc78",
+    "ADMIN_EMAILS": "col@oze.com.au"
+  },
+  // Secrets (set with wrangler secret put, never committed): TURNSTILE_SECRET, VOTE_SALT
+  "observability": { "enabled": true, "head_sampling_rate": 1 }
+}

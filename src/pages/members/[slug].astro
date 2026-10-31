@@ -1,0 +1,14 @@
+---
+import Base from '../../layouts/Base.astro';
+import MemberCard from '../../components/MemberCard.astro';
+import { members } from '../../data/members';
+export function getStaticPaths() { return members.map((m) => ({ params: { slug: m.slug }, props: { m } })); }
+const { m } = Astro.props;
+---
+<Base title={`${m.name}, Founding Member`} description={m.quote ? `${m.name} on the AI Consent Registry: "${m.quote}"` : `${m.name} declined to comment.`}>
+  <section class="prose">
+    <p><a href="/members/">All Founding Members</a></p>
+    <h1>{m.name}</h1>
+    <MemberCard m={m} full />
+  </section>
+</Base>

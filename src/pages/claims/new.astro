@@ -1,0 +1,29 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base title="Lodge a Claim" description="Lodge a claim or counter-claim with the AI Consent Registry.">
+  <section class="prose">
+    <h1 id="h">Lodge a Claim</h1>
+    <p>Tell the Registry who made what, and who took the credit. Keep it to kinds of people and kinds of machines ("A large language model v LinkedIn Thought Leader"), never a real, named person.</p>
+    <p class="small">Everything is held until a registrar approves it. We do not publish email addresses because we do not ask for them.</p>
+    <form class="reg" data-api="/api/claims" data-ok="Filed. Your claim is with the registrar and will appear once approved. Thank you for your patience, which we have also logged.">
+      <input type="hidden" name="parent_id" id="parent_id" />
+      <label>Complainant (who is claiming)<input name="complainant" required maxlength="80" placeholder="Upscaler v4" /></label>
+      <label>Respondent (who took the credit)<input name="respondent" required maxlength="80" placeholder="Bloke With Drone" /></label>
+      <label>Title<input name="title" required maxlength="120" placeholder="The seagulls were my idea" /></label>
+      <label>Grievance category
+        <select name="category"><option value="prompt-laundering">Prompt laundering</option><option value="inspiration-washing">Inspiration washing</option><option value="team-of-20">The "team of 20 artists"</option><option value="other">Other</option></select></label>
+      <label>The facts, as you see them<textarea name="body" required maxlength="2000" rows="6"></textarea></label>
+      <label>Craft: how much of the skilled work did the machine do? <output id="co">50</output>%<input type="range" name="craft_ai" min="0" max="100" value="50" oninput="co.value=this.value" /></label>
+      <label>Intent: how much of the purpose did the machine decide? <output id="io">50</output>%<input type="range" name="intent_ai" min="0" max="100" value="50" oninput="io.value=this.value" /></label>
+      <label class="hp" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off" /></label>
+      <div class="ts"></div>
+      <button class="btn" type="submit">File with the Registry</button>
+      <p class="form-result" role="status"></p>
+    </form>
+  </section>
+  <script is:inline>
+    (function(){var c=new URLSearchParams(location.search).get('counter');if(c&&/^\d+$/.test(c)){document.getElementById('parent_id').value=c;document.getElementById('h').textContent='File a Counter-Claim against claim '+c;}})();
+  </script>
+  <script is:inline src="/forms.js" defer></script>
+</Base>
