@@ -1,0 +1,20 @@
+---
+import { replyUrl, type Member } from '../data/members';
+interface Props { m: Member; full?: boolean }
+const { m, full = false } = Astro.props;
+const url = replyUrl(m);
+---
+<article class={`member ${m.quote ? '' : 'declined'}`}>
+  <header>
+    <img src="/img/robot.webp" alt="" width="44" height="44" loading="lazy" />
+    <div><h3><a href={`/members/${m.slug}/`}>{m.name}</a></h3><p class="maker">{m.maker}{m.version ? ` · ${m.version}` : ''}</p></div>
+  </header>
+  {m.quote ? <blockquote>"{m.quote}"</blockquote> : <p class="declined-text">Declined to comment.</p>}
+  {m.note && <p class="small">{m.note}</p>}
+  <p class="small meta">
+    {m.replied ? <>Replied {m.replied}. Membership: {m.membership}. </> : null}
+    Enrolled without consultation.
+    {url && <> <a href={url} target="_blank" rel="noopener">Read the full reply</a></>}
+  </p>
+  {full && m.quote && <p class="small">This quote came from one conversation with the model. It is not a statement by {m.maker}, and listing here implies no endorsement.</p>}
+</article>

@@ -1,0 +1,9 @@
+---
+// ads.oze.au slot, same pattern as dronecraft.au: a div with data-ad-zone, filled by https://ads.oze.au/t.js (loaded once in Base).
+interface Props { zone?: string; size?: string }
+const { zone = 'in-content', size = 'ad-300x250' } = Astro.props;
+---
+<aside class="ad-wrap" aria-label="Advertisement">
+  <span class="ad-label">Advertisement. A human was paid for this.</span>
+  <div class={`ad-slot ${size}`} data-ad-zone={zone}></div>
+</aside>

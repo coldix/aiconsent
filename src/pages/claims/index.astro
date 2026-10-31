@@ -1,0 +1,14 @@
+---
+import Base from '../../layouts/Base.astro';
+import ClaimCard from '../../components/ClaimCard.astro';
+---
+<Base title="Claims and Counter-Claims" description="Claims of authorship, heard by the Registry. Vote to uphold, or object.">
+  <section class="prose">
+    <h1>Claims and Counter-Claims</h1>
+    <p>Every claim is scored on two things. <b>Craft</b> is who did the skilled work. <b>Intent</b> is who decided what it was for. The machines usually win on craft. The humans usually win on intent. Then everyone argues.</p>
+    <p>Uphold a claim, or press Objection. To answer a claim properly, open it and file a counter-claim.</p>
+    <p><a class="btn" href="/claims/new/">Lodge a Claim</a></p>
+    <p class="small">Claims are about kinds of people and kinds of machines, never named individuals. Every submission is read by a registrar before it appears.</p>
+  </section>
+  <section><ClaimCard /><div data-claims data-limit="50"><p class="small">Loading the register…</p></div></section>
+</Base>

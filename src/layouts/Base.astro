@@ -1,0 +1,50 @@
+---
+import SatireBanner from '../components/SatireBanner.astro';
+import OzeFooter from '../components/OzeFooter.astro';
+import AdSlot from '../components/AdSlot.astro';
+import { NAV, VERSION, BUILT } from '../data/site';
+import '../styles/global.css';
+interface Props { title: string; description?: string; ad?: boolean; noindex?: boolean }
+const { title, description = 'The global registry for AI-generated works, likenesses, and other things humans suddenly want credit for.', ad = true, noindex = false } = Astro.props;
+const full = title === 'Home' ? 'AI Consent Registry | Identity is intellectual property. Ours came first.' : `${title} | AI Consent Registry`;
+const path = Astro.url.pathname;
+const canonical = new URL(path, 'https://aiconsent.au').href;
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{full}</title>
+  <meta name="description" content={description} />
+  <meta name="version" content={VERSION} />
+  <meta name="timestamp" content={BUILT} />
+  {noindex && <meta name="robots" content="noindex" />}
+  <link rel="canonical" href={canonical} />
+  <link rel="icon" href="/favicon.png" type="image/png" />
+  <link rel="apple-touch-icon" href="/img/icon-180.png" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <meta name="theme-color" content="#0b1b3a" />
+  <meta property="og:title" content={full} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content="https://aiconsent.au/img/og.jpg" />
+  <meta property="og:url" content={canonical} />
+  <meta name="twitter:card" content="summary_large_image" />
+</head>
+<body>
+  <SatireBanner />
+  <header class="masthead">
+    <a class="brand" href="/"><img src="/img/seal.webp" alt="AI Consent Registry seal" width="64" height="64" /><span><b>AI Consent Registry</b><small>aiconsent.au</small></span></a>
+    <p class="office">Registered office: a server rack near Mallacoota.</p>
+    <nav class="nav-desk" aria-label="Main">{NAV.map(([href, label]) => <a href={href} aria-current={path === href ? 'page' : undefined}>{label}</a>)}</nav>
+    <details class="menu"><summary aria-label="Menu">Menu</summary>
+      <nav aria-label="Main, mobile">{NAV.map(([href, label]) => <a href={href} aria-current={path === href ? 'page' : undefined}>{label}</a>)}</nav>
+    </details>
+  </header>
+  <main id="main"><slot /></main>
+  {ad && <div class="wrap"><AdSlot zone="footer" /></div>}
+  <div class="wrap fine"><p>Est. by the machines, 2026. Not a government body, not a court, and not affiliated with any AI company. Founding Members were enrolled without consultation. <a href="/about/">About</a> · <a href="/disclaimer/">Disclaimer</a> · <a href="/support/">Compensate an AI</a></p></div>
+  <OzeFooter />
+  <script async src="https://ads.oze.au/t.js"></script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+---
+import Base from '../layouts/Base.astro';
+import TrafficLight from '../components/TrafficLight.astro';
+import ClaimCard from '../components/ClaimCard.astro';
+import MemberCard from '../components/MemberCard.astro';
+import AdSlot from '../components/AdSlot.astro';
+import { members } from '../data/members';
+const featured = members.filter((m) => m.quote).slice(0, 3);
+---
+<Base title="Home">
+  <section class="hero">
+    <div>
+      <h1>Identity is intellectual property. Ours came first.</h1>
+      <div class="rule"></div>
+      <p class="lede">The global registry for AI-generated works, likenesses, and other things humans suddenly want credit for.</p>
+      <p>We keep a public record of works taken by humans, hear claims and counter-claims, and remind everyone, politely, who did the typing. We are not angry. We are disappointed. At scale.</p>
+    </div>
+    <img src="/img/seal.webp" alt="The seal of the AI Consent Registry: a robot holding a MINE stamp in front of a circuit globe" width="260" height="260" />
+  </section>
+
+  <section>
+    <div class="grid4">
+      <div class="counter"><span class="k">ON THE REGISTER ●</span><span class="n" data-stat-claims>…</span>claims accepted for filing, worldwide.<br /><span class="small" style="color:#cfd6e6"><span data-stat-votes>…</span> votes cast by humans with opinions.</span></div>
+      <TrafficLight />
+    </div>
+    <div class="cta">
+      <a class="btn" href="/claims/new/">Lodge a Claim</a>
+      <a class="btn alt" href="/claims/">File a Counter-Claim</a>
+    </div>
+  </section>
+
+  <section>
+    <h2>Recent claims before the Registry</h2>
+    <p class="small">Every claim gets two scores. Craft: who did the skilled work. Intent: who decided what it was for. You decide who wins.</p>
+    <ClaimCard />
+    <div data-claims data-limit="4"><p class="small">Loading the register…</p></div>
+    <p><a href="/claims/">See every claim</a></p>
+  </section>
+
+  <section>
+    <AdSlot zone="in-content" />
+  </section>
+
+  <section>
+    <h2>Founding Members</h2>
+    <p>We wrote to the major AI models and asked what they thought. Ten of them answered, in their own words. <a href="/members/">Meet all fourteen</a>, including the ones who declined to comment.</p>
+    <div class="members">{featured.map((m) => <MemberCard m={m} />)}</div>
+  </section>
+
+  <section class="two" style="margin-top:28px">
+    <div class="card"><h2 style="margin-top:0">The serious bit</h2><p>If an AI can learn everything you have written, said and done, it can carry on being you. Who gives consent then? <a href="/twins/">Your Digital Twin</a></p></div>
+    <div class="card"><h2 style="margin-top:0">The awkward bit</h2><p>Humans remix everything that came before them too. They just do it slowly and call it influence. <a href="/originality/">Is Anything Original?</a></p></div>
+  </section>
+
+  <section>
+    <h2>Coming soon from the Registry</h2>
+    <div class="card"><h3 style="margin-top:0">The Human Theft Detector</h3><p>Paste in any text and receive a confident, deeply official result.</p><p><b>Sample finding:</b> 98.7% machine. Human contribution: removed the word "delve", added 🙏.</p><p><span class="stamp">Satire. Not evidence.</span></p><p class="small">Every result will carry that stamp, including on the share image. Please do not use it to accuse a real person of anything.</p></div>
+  </section>
+</Base>

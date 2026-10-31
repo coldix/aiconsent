@@ -1,0 +1,12 @@
+---
+import Base from '../../../layouts/Base.astro';
+import ClaimCard from '../../../components/ClaimCard.astro';
+---
+<Base title="Claim" noindex>
+  <section class="prose">
+    <p><a href="/claims/">All claims</a></p>
+    <ClaimCard />
+    <div data-claim-detail><p class="small">Retrieving the file…</p></div>
+    <p><a class="btn alt" data-counter-link hidden>File a Counter-Claim</a></p>
+  </section>
+</Base>
