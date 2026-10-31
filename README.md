@@ -30,3 +30,5 @@ Paste [docs/ai-feedback-request.md](docs/ai-feedback-request.md) into any AI mod
 
 ---
 A project by Colin Dixon, Mallacoota. Website by [oze.au](https://oze.au).
+
+- [Is anything original?](docs/originality.md): originality, influence, and art versus craft.
