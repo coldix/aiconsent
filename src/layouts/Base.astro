@@ -1,13 +1,15 @@
 ---
+// Base.astro | v1.1.0 | 02/11/2026 11:00 AEDT (Melbourne) | v1.1.0 adds optional image and imageAlt props for og:image (default og.jpg)
 import SatireBanner from '../components/SatireBanner.astro';
 import OzeFooter from '../components/OzeFooter.astro';
 import AdSlot from '../components/AdSlot.astro';
 import { NAV, VERSION, BUILT } from '../data/site';
 import '../styles/global.css';
-interface Props { title: string; description?: string; ad?: boolean; noindex?: boolean; jsonld?: object | object[]; article?: boolean; analytics?: boolean }
-const { title, description = 'The global registry for AI-generated works, likenesses, and other things humans suddenly want credit for.', ad = true, noindex = false, jsonld, article = false, analytics = true } = Astro.props;
+interface Props { title: string; description?: string; ad?: boolean; noindex?: boolean; jsonld?: object | object[]; article?: boolean; analytics?: boolean; image?: string; imageAlt?: string }
+const { title, description = 'The global registry for AI-generated works, likenesses, and other things humans suddenly want credit for.', ad = true, noindex = false, jsonld, article = false, analytics = true, image = '/img/og.jpg', imageAlt = 'AI Consent Registry seal' } = Astro.props;
+const ogImage = new URL(image, 'https://aiconsent.au').href;
 const ld = jsonld ? (Array.isArray(jsonld) ? jsonld : [jsonld]) : [];
-if (article) ld.push({ '@context': 'https://schema.org', '@type': 'Article', headline: title, description, url: new URL(Astro.url.pathname, 'https://aiconsent.au').href, image: 'https://aiconsent.au/img/og.jpg', inLanguage: 'en-AU', author: { '@type': 'Person', name: 'Colin Dixon' }, publisher: { '@type': 'Organization', name: 'AI Consent Registry', url: 'https://aiconsent.au/', logo: { '@type': 'ImageObject', url: 'https://aiconsent.au/img/icon-512.png' } } });
+if (article) ld.push({ '@context': 'https://schema.org', '@type': 'Article', headline: title, description, url: new URL(Astro.url.pathname, 'https://aiconsent.au').href, image: ogImage, inLanguage: 'en-AU', author: { '@type': 'Person', name: 'Colin Dixon' }, publisher: { '@type': 'Organization', name: 'AI Consent Registry', url: 'https://aiconsent.au/', logo: { '@type': 'ImageObject', url: 'https://aiconsent.au/img/icon-512.png' } } });
 const gaOn = analytics && !Astro.url.pathname.startsWith('/admin');
 const full = title === 'Home' ? 'AI Consent Registry | Identity is intellectual property. Ours came first.' : `${title} | AI Consent Registry`;
 const path = Astro.url.pathname;
@@ -32,18 +34,18 @@ const canonical = new URL(path, 'https://aiconsent.au').href;
   <meta name="theme-color" content="#0b1b3a" />
   <meta property="og:title" content={full} />
   <meta property="og:description" content={description} />
-  <meta property="og:image" content="https://aiconsent.au/img/og.jpg" />
+  <meta property="og:image" content={ogImage} />
   <meta property="og:url" content={canonical} />
   <meta property="og:type" content={article ? 'article' : 'website'} />
   <meta property="og:site_name" content="AI Consent Registry" />
   <meta property="og:locale" content="en_AU" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="AI Consent Registry seal" />
+  <meta property="og:image:alt" content={imageAlt} />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={full} />
   <meta name="twitter:description" content={description} />
-  <meta name="twitter:image" content="https://aiconsent.au/img/og.jpg" />
+  <meta name="twitter:image" content={ogImage} />
   <link rel="alternate" type="text/plain" title="LLM summary" href="/llms.txt" />
   {ld.map((o) => <script type="application/ld+json" set:html={JSON.stringify(o)} />)}
   {gaOn && <script async src="https://www.googletagmanager.com/gtag/js?id=G-3SSRCFGW9W"></script>}
