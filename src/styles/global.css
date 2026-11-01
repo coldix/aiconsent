@@ -72,3 +72,4 @@ table{border-collapse:collapse;width:100%}td,th{border-bottom:1px solid var(--li
 .member .try{margin:4px 0 0;font-size:.85rem}.member .try a{text-decoration:none;font-weight:600}.member .try a:hover{text-decoration:underline}
 .fb img{vertical-align:-4px;transition:transform .15s}.fb:hover img{transform:scale(1.12)}
 @media (max-width:480px){.members{grid-template-columns:1fr}.member .logo{flex-basis:44px;height:44px}}
+.lm-logo{display:inline-block;margin:8px 0 4px}.lm-logo img{display:block;width:200px;max-width:60%;height:auto;border-radius:8px}
