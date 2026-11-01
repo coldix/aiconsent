@@ -19,6 +19,21 @@ Goal: turn the "Coming soon from the Registry" teaser on the home page into a wo
 - Images: `public/img/` (`robot.webp`, `seal.webp`, `og.jpg`).
 - There's no test framework yet. `npm run build` is the baseline check.
 
+## Step 0: check whether an AI verdict line is low effort
+Before building, spend a few minutes checking whether a short AI-written satirical verdict line is cheap to add with a **Cloudflare Workers AI binding** in `src/worker.ts` (free tier, small model). The heuristic score stays the base result and the fallback either way.
+
+Build it only if it's small (roughly under a couple of hours, no paid services). If it isn't, ship the heuristic alone and leave the AI idea as a note under Open questions.
+
+If you do build it:
+- Add a `POST /api/detector/quip` endpoint that takes the text plus the heuristic band and score, and returns one short witty verdict line (max about 25 words).
+- The pasted text is never stored or logged: no D1, no console.log of the body, no analytics. Process it in memory only.
+- Cap the length (e.g. send at most 2,000 characters to the model, reject over 10,000) and add a rate limit (e.g. Workers rate limiting binding or a simple per-IP limit, about 10 a minute).
+- The system prompt must forbid naming, identifying or accusing any real person, and must keep the deadpan Registry tone. Strip any names the model returns if you can do it simply.
+- Output always carries "Satire. Not evidence." (add it in the UI and the share image, not by trusting the model).
+- Graceful fallback: if the binding is missing, errors, times out (about 3 seconds) or the quota runs out, show a deterministic line from the heuristic instead. The page never breaks.
+- Update the privacy line to stay true (e.g. "Your text is checked in memory and never stored.") when the AI path is on.
+- Report effort, the model used, and the expected free-tier usage and cost in the Job report.
+
 ## What it does
 1. The user pastes text into a textarea and presses "Submit for Assessment".
 2. A deterministic, playful heuristic runs **in the browser** (preferred) and returns a confident, deeply official "Finding", e.g.:
@@ -66,12 +81,13 @@ Goal: turn the "Coming soon from the Registry" teaser on the home page into a wo
 - Check it in a browser on the Workers preview URL for your branch (`preview_urls` is on). Check mobile width too.
 
 ## Out of scope
-- Any server endpoint that receives the text. Changes to D1 or migrations. Turnstile.
+- Any server endpoint that receives the text, except the optional Step 0 quip endpoint. Changes to D1 or migrations. Turnstile.
 - Changes to Founding Members, logos or the support page (another PR, #4, covers those).
 
 ## Job report (end your work with this, in the PR description and in chat)
 - **What changed:** plain summary
 - **Files:** list added and modified files
 - **Preview URL:** Workers branch preview link
+- **AI effort and cost:** built or not, why, hours spent, model, free-tier usage and cost
 - **Tests:** what ran and the results, plus the manual checks done
 - **Open questions:** anything Colin needs to decide (copy, verdict bands, nav placement)
