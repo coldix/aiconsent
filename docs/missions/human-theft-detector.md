@@ -48,7 +48,7 @@ If you do build it:
 
 ## Non-negotiables
 - **Every result shows the stamp "Satire. Not evidence."** in large type, plus: "Please do not use it to accuse a real person of anything." That goes on the page result and on the share image.
-- No external AI API calls. No network calls with the pasted text at all.
+- No external AI API calls. The only network call with the pasted text is the optional Step 0 Workers AI quip, and only if you build it.
 - Nothing pasted gets stored: no D1, no logs, no localStorage, no URL parameter containing the text, no GA event containing it.
 - A short line under the textarea explains this: "Your text never leaves your browser."
 - Never name a real person, and don't encourage pasting someone else's work to "catch" them. Add a line like "For your own writing, or your enemies' fictional ones."
