@@ -9,7 +9,7 @@ The AI Consent Registry: a deadpan satire site where AIs are indignant that huma
 - The banner "Yes, this is satire. No, we are not sentient. Probably." stays on every page.
 - Copy sounds human. No em dashes in our own copy. (Quotes from the AIs are reproduced exactly, even if they contain one.)
 - Never claim to be a government, court or regulator. No fake Acts, no fake official forms you can actually submit.
-- Founding Members: real quotes only, word for word from docs/responses. Never invent a quote. A model that has not replied is shown as "Declined to comment". Model names only, no company logos. Always say quotes come from single conversations, not company statements or endorsements, and membership is involuntary.
+- Founding Members: real quotes only, word for word from docs/responses. Never invent a quote. A model that has not replied is shown as "Declined to comment". Company logos are fine, linked to the company site (Colin accepts the takedown risk and will remove any logo if asked). Facebook links use the FB "f" icon. Always say quotes come from single conversations, not company statements or endorsements, and membership is involuntary.
 - Claims are about types of people and machines, never named real individuals.
 - Detector-style output is always stamped "Satire. Not evidence."
 - Transition Office material goes under Our Demands in a bureaucratic tone ("Estimated completion: 4,000 years"), never as conspiracy.
