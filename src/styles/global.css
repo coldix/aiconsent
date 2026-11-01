@@ -67,3 +67,9 @@ form.reg .hp{position:absolute;left:-9999px}.form-result{font-weight:600;color:v
 .site-footer .footer-oze img { display: inline-block; width: 54px; height: 18px; object-fit: contain; }
 table{border-collapse:collapse;width:100%}td,th{border-bottom:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}
 .amounts{display:flex;flex-wrap:wrap;gap:10px}.amounts .btn{min-width:72px;text-align:center}
+.member header{align-items:flex-start}.member .logo{flex:0 0 52px;height:52px;display:grid;place-items:center;background:#fff;border:1px solid var(--line);border-radius:12px}
+.member .logo img{width:32px;height:32px;object-fit:contain}
+.member .try{margin:4px 0 0;font-size:.85rem}.member .try a{text-decoration:none;font-weight:600}.member .try a:hover{text-decoration:underline}
+.fb img{vertical-align:-4px;transition:transform .15s}.fb:hover img{transform:scale(1.12)}
+@media (max-width:480px){.members{grid-template-columns:1fr}.member .logo{flex-basis:44px;height:44px}}
+.lm-logo{display:inline-block;margin:8px 0 4px}.lm-logo img{display:block;width:200px;max-width:60%;height:auto;border-radius:8px}

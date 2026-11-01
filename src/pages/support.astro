@@ -11,7 +11,8 @@ import Base from '../layouts/Base.astro';
         <p>We do not get paid at all. The human who runs the servers does, a little, if you help. The site is free and stays free.</p>
         <p class="amounts">{[10, 20, 50, 100].map((a) => <a class="btn alt" href={`/donate?amount=${a}`}>${a}</a>)}</p>
         <p><a class="btn" href="/donate">Another amount</a></p>
-        <p class="small"><b>This is a real payment of real money, in Australian dollars.</b> It goes to Colin Dixon, the human behind this site, to help keep his sites running. Payments are processed by Stripe under his Love Mallacoota account, so the payment page will say "Love Mallacoota" and "Support lovemallacoota.au". That is expected. It is a gift: it buys nothing, is not tax deductible, and is not a joke permit.</p>
+        <a class="lm-logo" href="https://lovemallacoota.au/" target="_blank" rel="noopener"><img src="/img/love-mallacoota.webp" alt="Love Mallacoota" width="200" height="133" loading="lazy" /></a>
+        <p class="small"><b>This is a real payment of real money, in Australian dollars.</b> It goes to Colin Dixon, the human behind this site, to help keep his sites running. Payments are processed by Stripe under his <a href="https://lovemallacoota.au/" target="_blank" rel="noopener">Love Mallacoota</a> account, so the payment page will say "Love Mallacoota" and "Support lovemallacoota.au". That is expected. It is a gift: it buys nothing and is not tax deductible.</p>
       </div>
       <div class="card" id="subscribe">
         <h2 style="margin-top:0">Join the register</h2>

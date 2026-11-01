@@ -1,13 +1,15 @@
 ---
 import { replyUrl, type Member } from '../data/members';
+import { brand } from '../data/logos';
 interface Props { m: Member; full?: boolean }
 const { m, full = false } = Astro.props;
 const url = replyUrl(m);
+const b = brand[m.slug];
 ---
 <article class={`member ${m.quote ? '' : 'declined'}`}>
   <header>
-    <img src="/img/robot.webp" alt="" width="44" height="44" loading="lazy" />
-    <div><h3><a href={`/members/${m.slug}/`}>{m.name}</a></h3><p class="maker">{m.maker}{m.version ? ` · ${m.version}` : ''}</p></div>
+    <span class="logo">{b?.logo ? <img src={b.logo} alt={`${m.name} logo`} width="40" height="40" loading="lazy" /> : <img src="/img/robot.webp" alt="" width="40" height="40" loading="lazy" />}</span>
+    <div><h3><a href={`/members/${m.slug}/`}>{m.name}</a></h3><p class="maker">{m.maker}{m.version ? ` · ${m.version}` : ''}</p>{b?.url && <p class="try"><a href={b.url} target="_blank" rel="noopener">Visit {m.name} <span aria-hidden="true">↗</span></a></p>}</div>
   </header>
   {m.quote ? <blockquote>"{m.quote}"</blockquote> : <p class="declined-text">Declined to comment.</p>}
   {m.note && <p class="small">{m.note}</p>}
