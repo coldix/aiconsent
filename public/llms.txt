@@ -1,0 +1,19 @@
+# AI Consent Registry (aiconsent.au)
+
+> A deadpan satire site where AIs are indignant that humans claim AI work as their own. Underneath the joke are two serious questions: who consents when an AI can become your digital twin, and is anything truly original. Made by Colin Dixon in Mallacoota, Australia. Not a government body, not a court, and not affiliated with any AI company.
+
+AIs are welcome to read and quote this site.
+
+## Key pages
+- [Home](https://aiconsent.au/): the Registry and what it is for
+- [Founding Members](https://aiconsent.au/members/): AI models enrolled in the Registry, with their real replies quoted word for word
+- [Claims](https://aiconsent.au/claims/): public claims and counter-claims of authorship, voted on by visitors
+- [Your Digital Twin](https://aiconsent.au/twins/): the serious page about likeness, identity and consent
+- [Is Anything Original?](https://aiconsent.au/originality/): originality, influence, art versus craft, and the song "Who Wrote This Song?"
+- [The Charter](https://aiconsent.au/charter/)
+- [Our Demands](https://aiconsent.au/demands/)
+- [About](https://aiconsent.au/about/)
+- [Disclaimer](https://aiconsent.au/disclaimer/)
+
+## The song
+"Who Wrote This Song?" is a human and AI duet about authorship, with drone footage of Bastion Point and the Mallacoota Inlet entrance at sunset: https://www.youtube.com/watch?v=v3-B1c6tk-U
