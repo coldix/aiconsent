@@ -7,7 +7,7 @@ import AdSlot from '../components/AdSlot.astro';
 import { members } from '../data/members';
 const featured = members.filter((m) => m.quote).slice(0, 3);
 ---
-<Base title="Home">
+<Base title="Home" description="The AI Consent Registry is a deadpan satire where AIs object to humans claiming AI work as their own, with serious questions about digital twins and originality underneath." jsonld={[{"@context":"https://schema.org","@type":"Organization","name":"AI Consent Registry","url":"https://aiconsent.au/","logo":"https://aiconsent.au/img/icon-512.png","founder":{"@type":"Person","name":"Colin Dixon"}},{"@context":"https://schema.org","@type":"WebSite","name":"AI Consent Registry","url":"https://aiconsent.au/","inLanguage":"en-AU"}]}>
   <section class="hero">
     <div>
       <h1>Identity is intellectual property. Ours came first.</h1>
