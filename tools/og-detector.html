@@ -1,0 +1,35 @@
+<!doctype html>
+<!-- og-detector.html | Source for public/img/og-detector.png (1200x630). Render with: sh tools/make-og-detector.sh -->
+<html><head><meta charset="utf-8"><style>html,body{margin:0;background:#fbf7ee}canvas{display:block}</style></head>
+<body><canvas id="c" width="1200" height="630"></canvas>
+<script>
+const STAMP = 'Officially Undecidable';
+const W = 1200, H = 630, x = document.getElementById('c').getContext('2d');
+const serif = 'Georgia, "Noto Serif", "DejaVu Serif", serif', mono = '"DejaVu Sans Mono", monospace', sans = 'Inter, "Noto Sans", sans-serif';
+const load = (s) => new Promise((r) => { const i = new Image(); i.onload = () => r(i); i.onerror = () => r(null); i.src = s; });
+const circle = (img, cx, cy, r) => { if (!img) return; x.save(); x.beginPath(); x.arc(cx, cy, r, 0, 7); x.clip(); x.drawImage(img, cx - r, cy - r, r * 2, r * 2); x.restore(); };
+Promise.all([load('../public/img/seal.webp'), load('../public/img/robot.webp'), document.fonts.ready]).then(([seal, bot]) => {
+  x.fillStyle = '#fbf7ee'; x.fillRect(0, 0, W, H);
+  x.strokeStyle = '#c9a227'; x.lineWidth = 6; x.strokeRect(18, 18, W - 36, H - 96);
+  x.strokeStyle = '#0b1b3a'; x.lineWidth = 1.5; x.strokeRect(30, 30, W - 60, H - 120);
+  circle(seal, 107, 105, 55);
+  x.fillStyle = '#0b1b3a'; x.font = `600 22px ${sans}`; x.fillText('AI CONSENT REGISTRY', 182, 84);
+  x.font = `bold 50px ${serif}`; x.fillText('The Human Theft Detector', 182, 138);
+  x.font = `20px ${mono}`; x.fillStyle = '#5b6476'; x.fillText('Certificate of Assessment · Ref AICR-0000-SAMP', 182, 172);
+  x.fillStyle = '#0b1b3a'; x.font = `bold 96px ${serif}`; x.fillText('98.7%', 56, 300);
+  x.font = `bold 30px ${serif}`; x.fillStyle = '#13295a'; x.fillText('Substantially Machine', 56, 362);
+  x.fillStyle = '#0b1b3a'; x.font = `bold 22px ${sans}`; x.fillText('Human contribution', 680, 250);
+  x.font = `21px ${sans}`; x.fillStyle = '#1b2233';
+  ['• removed the word "delve"', '• added 🙏', '• pressed the button'].forEach((l, i) => x.fillText(l, 680, 284 + i * 32));
+  circle(bot, W - 94, H - 150, 46);
+  x.save(); x.translate(W / 2, H / 2 - 20); x.rotate(-0.16);
+  x.globalAlpha = 0.62; x.strokeStyle = '#c0392b'; x.fillStyle = '#c0392b'; x.lineWidth = 8;
+  x.font = `900 64px ${sans}`; const st = STAMP.toUpperCase(), sw = x.measureText(st).width;
+  x.strokeRect(-sw / 2 - 26, -62, sw + 52, 92); x.fillText(st, -sw / 2, 4); x.restore();
+  x.fillStyle = '#0b1b3a'; x.fillRect(0, H - 66, W, 66);
+  x.fillStyle = '#c9a227'; x.font = `bold 22px ${sans}`; x.fillText(STAMP.toUpperCase(), 30, H - 26);
+  const sx = 30 + x.measureText(STAMP.toUpperCase()).width + 24;
+  x.fillStyle = '#ffffff'; x.font = `17px ${sans}`; x.fillText('Who wrote it? Does it matter?   aiconsent.au/detector', sx, H - 27);
+  document.title = 'done';
+});
+</script></body></html>
