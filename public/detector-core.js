@@ -1,10 +1,10 @@
 // detector-core.js | v1.0.0 | 02/11/2026 10:35 AEDT (Melbourne)
 // The Human Theft Detector: deterministic, playful heuristic. Pure functions, no network, no storage.
 // Same text in, same Finding out. Runs in the browser and under node --test.
-// Satire. Not evidence.
+// The stamp line is picked from STAMPS by the same hash, so a re-run and its PNG match.
 
-export const STAMP = 'Satire. Not evidence.';
-export const DO_NOT_ACCUSE = 'Please do not use it to accuse a real person of anything.';
+export const STAMPS = ['Certified by the Registry', 'Who wrote it? Does it matter?', 'Officially Undecidable', 'Humans borrow too'];
+export const stampFor = (h) => STAMPS[Math.floor(h / 7) % STAMPS.length];
 export const REFUSAL = 'Insufficient evidence. Even for us.';
 export const MAX_CHARS = 10000;
 const MIN_CHARS = 40;
@@ -179,7 +179,7 @@ function lineItems(tl) {
 
 export function assess(text) {
   const t = normalise(text).slice(0, MAX_CHARS);
-  const base = { stamp: STAMP, warning: DO_NOT_ACCUSE };
+  const base = { stamp: stampFor(hash53(t)) };
   if (t.length < MIN_CHARS || (t.match(/\S+/g) || []).length < MIN_WORDS) {
     return { ...base, refused: true, message: REFUSAL };
   }

@@ -2,7 +2,7 @@
 // Run with: npm test  (node --test, no extra dependencies)
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { assess, findingLine, STAMP, DO_NOT_ACCUSE, REFUSAL, BAND_NAMES } from '../public/detector-core.js';
+import { assess, findingLine, STAMPS, REFUSAL, BAND_NAMES } from '../public/detector-core.js';
 
 const AI_TEXT = `Certainly! In today's fast-paced world, it's important to note that we must delve into the rich tapestry of ideas — a testament to seamless, robust and scalable thinking. 🙏✨
 ## Key points
@@ -18,13 +18,16 @@ test('same input gives the same output', () => {
   assert.deepEqual(assess(HUMAN_TEXT), assess('  ' + HUMAN_TEXT.replace(/ /g, '  ') + '\n\n\n'));
 });
 
-test('output always contains the stamp text', () => {
+test('output always carries one of the four stamp lines, picked per text', () => {
+  assert.deepEqual(STAMPS, ['Certified by the Registry', 'Who wrote it? Does it matter?', 'Officially Undecidable', 'Humans borrow too']);
   for (const t of [AI_TEXT, HUMAN_TEXT, '', 'too short', 'x'.repeat(20000)]) {
     const r = assess(t);
-    assert.equal(r.stamp, STAMP);
-    assert.equal(r.warning, DO_NOT_ACCUSE);
-    assert.equal(STAMP, 'Satire. Not evidence.');
+    assert.ok(STAMPS.includes(r.stamp));
+    assert.equal(assess(t).stamp, r.stamp);
   }
+  const seen = new Set();
+  for (let i = 0; i < 200; i++) seen.add(assess(`Sample text number ${i} for the Registry, written with care and some delve.`).stamp);
+  assert.equal(seen.size, STAMPS.length);
 });
 
 test('empty or very short input gets the refusal', () => {

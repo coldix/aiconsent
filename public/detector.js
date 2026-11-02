@@ -1,7 +1,7 @@
 // detector.js | v1.0.0 | 02/11/2026 11:15 AEDT (Melbourne) | The Human Theft Detector, page script
 // Renders the certificate, builds the share image with <canvas> (all local), and optionally asks for a quip.
 // The pasted text is never stored: no localStorage, no URL parameters, no analytics containing it.
-import { assess, STAMP, DO_NOT_ACCUSE } from './detector-core.js';
+import { assess } from './detector-core.js';
 
 const form = document.getElementById('det-form');
 const ta = document.getElementById('det-text');
@@ -25,8 +25,7 @@ function renderRefusal(r) {
   out.innerHTML = '';
   const c = el('div', 'det-cert det-refused');
   c.append(el('p', 'det-kicker', 'Assessment declined'), el('p', 'det-band', r.message));
-  const s = el('p', 'det-stampline'); s.append(el('span', 'stamp det-bigstamp', STAMP)); c.append(s);
-  c.append(el('p', 'small', DO_NOT_ACCUSE));
+  const s = el('p', 'det-stampline'); s.append(el('span', 'stamp det-bigstamp', r.stamp)); c.append(s);
   out.append(c);
 }
 
@@ -70,8 +69,7 @@ function renderCert(r, date) {
   officer.append(bot, el('p', 'small', 'Signed, with some difficulty, by the Assessing Officer.'));
   c.append(officer);
 
-  const s = el('p', 'det-stampline'); s.append(el('span', 'stamp det-bigstamp', STAMP)); c.append(s);
-  c.append(el('p', 'det-warn', DO_NOT_ACCUSE));
+  const s = el('p', 'det-stampline'); s.append(el('span', 'stamp det-bigstamp', r.stamp)); c.append(s);
   out.append(c);
 
   // Actions
@@ -184,17 +182,17 @@ async function drawCertificate(withExcerpt) {
   x.save(); x.translate(W / 2, H / 2 - 20); x.rotate(-0.16);
   x.globalAlpha = 0.62; x.strokeStyle = '#c0392b'; x.fillStyle = '#c0392b'; x.lineWidth = 8;
   x.font = `900 64px ${sans}`;
-  const st = STAMP.toUpperCase(); const sw = x.measureText(st).width;
+  const STAMP = current.r.stamp; const st = STAMP.toUpperCase(); const sw = x.measureText(st).width;
   x.strokeRect(-sw / 2 - 26, -62, sw + 52, 92);
   x.fillText(st, -sw / 2, 4);
   x.restore();
 
-  // Footer strip repeats the stamp and the warning
+  // Footer strip repeats the stamp
   x.fillStyle = '#0b1b3a'; x.fillRect(0, H - 66, W, 66);
   x.fillStyle = '#c9a227'; x.font = `bold 22px ${sans}`; x.fillText(STAMP.toUpperCase(), 30, H - 26);
   x.fillStyle = '#ffffff'; x.font = `17px ${sans}`;
   const sx = 30 + (() => { x.font = `bold 22px ${sans}`; const w = x.measureText(STAMP.toUpperCase()).width; x.font = `17px ${sans}`; return w; })() + 20;
-  x.fillText(DO_NOT_ACCUSE + '  aiconsent.au/detector', sx, H - 27);
+  x.fillText('aiconsent.au/detector', sx, H - 27);
 
   return new Promise((res) => cv.toBlob((b) => res(b), 'image/png'));
 }
@@ -222,7 +220,7 @@ async function share(withExcerpt) {
   if (!blob) return;
   const file = new File([blob], fileName(), { type: 'image/png' });
   try {
-    await navigator.share({ files: [file], title: 'Certificate of Assessment', text: `${current.r.pctText} machine, according to the AI Consent Registry. ${STAMP} ${SITE}` });
+    await navigator.share({ files: [file], title: 'Certificate of Assessment', text: `${current.r.pctText} machine, according to the AI Consent Registry. ${current.r.stamp}. ${SITE}` });
     ga('detector_share', {});
   } catch (e) {
     if (e && e.name === 'AbortError') return; // user cancelled
