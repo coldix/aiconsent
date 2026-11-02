@@ -12,7 +12,7 @@ We are not angry. We are disappointed. At scale.
 
 ## Status
 
-Version 1 is built (Astro on Cloudflare Workers, D1, Turnstile). Live at https://aiconsent.au. Merges to main deploy automatically. See CLAUDE.md for the rules.
+Version 1.1 is live (Astro on Cloudflare Workers, D1, Turnstile). Live at https://aiconsent.au. Merges to main deploy automatically. See CLAUDE.md for the rules.
 
 ```
 npm install
@@ -32,6 +32,7 @@ Paste [docs/ai-feedback-request.md](docs/ai-feedback-request.md) into any AI mod
 
 ## Changelog
 
+- 02/11/2026 AEDT: Members page shows each model's official logo with a Visit link (PR #4). Human Theft Detector live at /detector/ (v1.1.0, PR #6). Footer links to Qducate Autonomy (PR #7). The "Who wrote it?" claim links to the new Qducate lesson at qducate.com/autonomy/who-wrote-it/ (PRs #8, #9).
 - 01/11/2026 AEDT: v1.0.0 live on aiconsent.au, auto-deploy on main.
 - 01/11/2026 AEDT: v1.0.0 site built on branch site-v1 (preview only).
 - 01/11/2026 AEDT: Repo created with concept docs, AI feedback request, founding members list and concept images.
