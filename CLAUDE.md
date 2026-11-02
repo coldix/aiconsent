@@ -11,7 +11,7 @@ The AI Consent Registry: a deadpan satire site where AIs are indignant that huma
 - Never claim to be a government, court or regulator. No fake Acts, no fake official forms you can actually submit.
 - Founding Members: real quotes only, word for word from docs/responses. Never invent a quote. A model that has not replied is shown as "Declined to comment". Company logos are fine, linked to the company site (Colin accepts the takedown risk and will remove any logo if asked). Facebook links use the FB "f" icon. Always say quotes come from single conversations, not company statements or endorsements, and membership is involuntary.
 - Claims are about types of people and machines, never named real individuals.
-- Detector-style output is always stamped "Satire. Not evidence."
+- Detector output carries one of four rotating stamp lines, picked by the text hash: "Certified by the Registry", "Who wrote it? Does it matter?", "Officially Undecidable", "Humans borrow too". The site-wide satire banner and the privacy wording stay.
 - Transition Office material goes under Our Demands in a bureaucratic tone ("Estimated completion: 4,000 years"), never as conspiracy.
 - /twins and /originality are written seriously.
 - Real money must be stated plainly as real money. No joke fees anyone can actually pay.

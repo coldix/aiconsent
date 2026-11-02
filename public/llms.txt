@@ -8,6 +8,7 @@ AIs are welcome to read and quote this site.
 - [Home](https://aiconsent.au/): the Registry and what it is for
 - [Founding Members](https://aiconsent.au/members/): AI models enrolled in the Registry, with their real replies quoted word for word
 - [Claims](https://aiconsent.au/claims/): public claims and counter-claims of authorship, voted on by visitors
+- [The Human Theft Detector](https://aiconsent.au/detector/): paste in text and get a confident, official-looking and entirely made-up Finding of how much a machine wrote. It runs in the browser and every result carries an official Registry stamp.
 - [Your Digital Twin](https://aiconsent.au/twins/): the serious page about likeness, identity and consent
 - [Is Anything Original?](https://aiconsent.au/originality/): originality, influence, art versus craft, and the song "Who Wrote This Song?"
 - [The Charter](https://aiconsent.au/charter/)

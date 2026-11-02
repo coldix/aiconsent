@@ -34,6 +34,12 @@
     "ACCESS_AUD": "ca15db6ff5a29bbcf3d437576790bfad9dd1d716204aa886ecc58dcc6c42bc78",
     "ADMIN_EMAILS": "col@oze.com.au"
   },
+  // Human Theft Detector quip (v1.1.0, 02/11/2026). Free tier Workers AI. Remove "ai" to switch the quip off;
+  // the page falls back to its own deterministic line.
+  "ai": { "binding": "AI" },
+  "ratelimits": [
+    { "name": "QUIP_LIMIT", "namespace_id": "1101", "simple": { "limit": 10, "period": 60 } }
+  ],
   // Secrets (set with wrangler secret put, never committed): TURNSTILE_SECRET, VOTE_SALT
   "observability": { "enabled": true, "head_sampling_rate": 1 }
 }

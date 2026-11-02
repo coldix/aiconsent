@@ -1,0 +1,28 @@
+---
+// detector.astro | v1.0.0 | 02/11/2026 11:05 AEDT (Melbourne) | The Human Theft Detector
+// The heuristic runs in the browser (public/detector-core.js). Nothing pasted is stored, logged or sent to analytics.
+// The optional one-line verdict (opt-in tick box) goes to /api/detector/quip, is checked in memory and never stored.
+import Base from '../layouts/Base.astro';
+---
+<Base title="The Human Theft Detector" description="Paste in any text and the AI Consent Registry will tell you, with total confidence and no evidence, how much of it a machine wrote. Satire." image="/img/og-detector.png" imageAlt="The Human Theft Detector certificate, stamped by the Registry">
+  <section class="det">
+    <h1>The Human Theft Detector</h1>
+    <p class="lede">Paste in any text. The Registry will tell you, with total confidence and no evidence at all, how much of it a machine wrote.</p>
+    <p><span class="stamp">Certified by the Registry</span></p>
+
+    <form id="det-form" class="det-form" novalidate>
+      <label for="det-text">Text for assessment</label>
+      <textarea id="det-text" name="text" rows="9" maxlength="10000" aria-describedby="det-privacy det-help" placeholder="Paste a paragraph or two. Your own writing works best."></textarea>
+      <p id="det-privacy" class="det-privacy">Your text never leaves your browser.</p>
+      <p id="det-help" class="small">For your own writing, or your enemies' fictional ones.</p>
+      <label class="det-check"><input type="checkbox" id="det-quip" /> <span>Also ask the Assessing Officer (a small AI) for a one-line remark. This sends your text to our server, where it is checked in memory and never stored.</span></label>
+      <div><button class="btn" type="submit">Submit for Assessment</button></div>
+    </form>
+
+    <div id="det-result" class="det-result" aria-live="polite"></div>
+
+    <p class="small det-method">Methodology: vibes, a hash function and several AIs who would rather not be named. The same text always gets the same Finding, which is more than most experts can say.</p>
+    <p class="small">The Registry is not a government body, a court or a regulator. <a href="/disclaimer/">Disclaimer</a></p>
+  </section>
+  <script is:inline type="module" src="/detector.js"></script>
+</Base>

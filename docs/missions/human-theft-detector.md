@@ -29,7 +29,7 @@ If you do build it:
 - The pasted text is never stored or logged: no D1, no console.log of the body, no analytics. Process it in memory only.
 - Cap the length (e.g. send at most 2,000 characters to the model, reject over 10,000) and add a rate limit (e.g. Workers rate limiting binding or a simple per-IP limit, about 10 a minute).
 - The system prompt must forbid naming, identifying or accusing any real person, and must keep the deadpan Registry tone. Strip any names the model returns if you can do it simply.
-- Output always carries "Satire. Not evidence." (add it in the UI and the share image, not by trusting the model).
+- Output always carries the Registry stamp (added in the UI and the share image, not by trusting the model).
 - Graceful fallback: if the binding is missing, errors, times out (about 3 seconds) or the quota runs out, show a deterministic line from the heuristic instead. The page never breaks.
 - Update the privacy line to stay true (e.g. "Your text is checked in memory and never stored.") when the AI path is on.
 - Report effort, the model used, and the expected free-tier usage and cost in the Job report.
@@ -47,14 +47,14 @@ If you do build it:
 5. Empty or very short input gets a polite deadpan refusal ("Insufficient evidence. Even for us.").
 
 ## Non-negotiables
-- **Every result shows the stamp "Satire. Not evidence."** in large type, plus: "Please do not use it to accuse a real person of anything." That goes on the page result and on the share image.
+- **Every result shows a stamp** in large type, one of four lines picked by the text hash: "Certified by the Registry", "Who wrote it? Does it matter?", "Officially Undecidable", "Humans borrow too" (updated 2 Nov at Colin's direction). That goes on the page result and on the share image.
 - No external AI API calls. The only network call with the pasted text is the optional Step 0 Workers AI quip, and only if you build it.
 - Nothing pasted gets stored: no D1, no logs, no localStorage, no URL parameter containing the text, no GA event containing it.
 - A short line under the textarea explains this: "Your text never leaves your browser."
 - Never name a real person, and don't encourage pasting someone else's work to "catch" them. Add a line like "For your own writing, or your enemies' fictional ones."
 
 ## Share image
-- A "Download certificate" button makes a 1200x630 PNG in the browser using `<canvas>`, so the text stays local. It shows the verdict, percentage, reference number, the seal, and the stamp "Satire. Not evidence." plus the do-not-accuse line. The stamp must not be croppable away easily, so put it across the middle at an angle and repeat it in the footer strip.
+- A "Download certificate" button makes a 1200x630 PNG in the browser using `<canvas>`, so the text stays local. It shows the verdict, percentage, reference number, the seal, and the rotating stamp line. The stamp must not be croppable away easily, so put it across the middle at an angle and repeat it in the footer strip.
 - Use the Web Share API (`navigator.share` with files) where it's available, and fall back to download.
 - The share image may contain at most a short excerpt (first 60 characters) of the pasted text, and only if the user ticks "Include an excerpt". It's off by default.
 - Add a static OG image for the page itself (`public/img/og-detector.png`, 1200x630, stamp included), set through Base's props or a slot. Check how Base handles og:image and extend it carefully. Don't break other pages.
